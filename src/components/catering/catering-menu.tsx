@@ -139,10 +139,7 @@ function DishPhoto({ src, name, compact }: { src: string; name: string; compact:
                     onClick={() => setOpen(false)}
                     aria-describedby={undefined}
                     className='data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95 fixed inset-0 z-50 flex cursor-zoom-out flex-col items-center justify-center gap-5 p-4 outline-none sm:p-10'>
-                    <DialogPrimitive.Title className='font-display bg-cream text-pink-deep rounded-full px-7 py-2.5 text-3xl leading-none shadow-lg sm:text-4xl'>
-                        {name}
-                    </DialogPrimitive.Title>
-                    <div className='relative aspect-square w-full max-w-[min(90vw,calc(100svh-10rem))] overflow-hidden rounded-[2rem] shadow-2xl'>
+                    <div className='relative aspect-square w-full max-w-[min(90vw,calc(100svh-5rem))] overflow-hidden rounded-[2rem] shadow-2xl'>
                         <Image
                             src={src}
                             alt={name}
@@ -151,6 +148,9 @@ function DishPhoto({ src, name, compact }: { src: string; name: string; compact:
                             quality={90}
                             className='object-cover'
                         />
+                        <DialogPrimitive.Title className='font-display bg-cream/95 text-pink-deep absolute top-4 left-1/2 max-w-[calc(100%-2rem)] -translate-x-1/2 truncate rounded-full px-6 py-2 text-2xl leading-none shadow-lg backdrop-blur-sm sm:top-6 sm:text-4xl'>
+                            {name}
+                        </DialogPrimitive.Title>
                     </div>
                     <DialogPrimitive.Close
                         aria-label='Close'
