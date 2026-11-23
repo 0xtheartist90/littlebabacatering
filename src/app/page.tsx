@@ -322,7 +322,7 @@ export default function CateringPage() {
                             sizes='100vw'
                             className='pointer-events-none absolute inset-x-0 bottom-0 w-full opacity-60 select-none'
                         />
-                        <div className='relative mx-auto max-w-3xl px-4 pt-14 pb-[30vw] sm:px-6 sm:pt-20 lg:pt-28 lg:pb-[22vw]'>
+                        <div className='relative mx-auto max-w-3xl px-4 pt-14 pb-[14vw] sm:px-6 sm:pt-20 lg:pt-24 lg:pb-[9vw]'>
                             <h2 id='faq-title' className='font-display text-pink text-center text-4xl sm:text-6xl'>
                                 Good questions
                             </h2>
