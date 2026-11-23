@@ -5,7 +5,7 @@ import { HowItWorks } from '@/components/catering/how-it-works';
 import { InquiryForm } from '@/components/catering/inquiry-form';
 import { Occasions } from '@/components/catering/occasions';
 import { OrderProvider } from '@/components/catering/order-context';
-import { OrderSummary } from '@/components/catering/order-summary';
+import { BuildFirstPrompt, OrderSummary } from '@/components/catering/order-summary';
 import { type MarqueeItem, PhotoMarquee } from '@/components/catering/photo-marquee';
 import { SiteFooter } from '@/components/catering/site-footer';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/registry/new-york-v4/ui/accordion';
@@ -241,63 +241,68 @@ export default function CateringPage() {
                         id='quote'
                         className='bg-pink scroll-mt-20 py-14 text-white sm:py-20 lg:py-28'
                         aria-labelledby='quote-title'>
-                        <div className='mx-auto grid max-w-7xl gap-8 px-4 sm:gap-12 sm:px-6 lg:grid-cols-[0.8fr_1.2fr]'>
-                            <div>
-                                <h2 id='quote-title' className='font-display text-4xl leading-none sm:text-6xl'>
-                                    Let’s feed your people.
-                                </h2>
-                                <p className='mt-4 text-sm leading-relaxed sm:mt-5 sm:text-base'>
-                                    Tell us a little about your event and we’ll get back to you with a tailored
-                                    proposal.
-                                </p>
-                                <ul className='mt-6 grid gap-2.5 sm:mt-8 sm:gap-3'>
-                                    {[
-                                        {
-                                            Icon: Mail,
-                                            label: 'Email',
-                                            value: 'info@littlebaba.com',
-                                            href: 'mailto:info@littlebaba.com'
-                                        },
-                                        {
-                                            Icon: Phone,
-                                            label: 'Phone',
-                                            value: '(647) 265-8237',
-                                            href: 'tel:+16472658237'
-                                        },
-                                        {
-                                            Icon: MapPin,
-                                            label: 'Kitchen · pickup',
-                                            value: '75 Portland St., Toronto',
-                                            href: 'https://maps.google.com/?q=75+Portland+St,+Toronto,+ON+M5V+2M9'
-                                        }
-                                    ].map(({ Icon, label, value, href }) => (
-                                        <li key={label}>
-                                            <a
-                                                href={href}
-                                                className='group flex items-center gap-4 rounded-2xl border-2 border-white/30 bg-white/10 p-3 pr-4 transition hover:border-white hover:bg-white/20 focus-visible:ring-4 focus-visible:ring-white/40 focus-visible:outline-none'>
-                                                <span className='text-pink-deep flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white shadow-sm'>
-                                                    <Icon className='h-5 w-5' aria-hidden />
-                                                </span>
-                                                <span className='min-w-0 flex-1'>
-                                                    <span className='block text-[11px] tracking-[0.2em] text-white/75 uppercase'>
-                                                        {label}
+                        <div className='mx-auto max-w-7xl px-4 sm:px-6'>
+                            <BuildFirstPrompt />
+                            <div className='grid gap-8 sm:gap-12 lg:grid-cols-[0.8fr_1.2fr]'>
+                                <div>
+                                    <h2 id='quote-title' className='font-display text-4xl leading-none sm:text-6xl'>
+                                        Let’s feed your people.
+                                    </h2>
+                                    <p className='mt-4 text-sm leading-relaxed sm:mt-5 sm:text-base'>
+                                        Tell us a little about your event and we’ll get back to you with a tailored
+                                        proposal.
+                                    </p>
+                                    <ul className='mt-6 grid gap-2.5 sm:mt-8 sm:gap-3'>
+                                        {[
+                                            {
+                                                Icon: Mail,
+                                                label: 'Email',
+                                                value: 'info@littlebaba.com',
+                                                href: 'mailto:info@littlebaba.com'
+                                            },
+                                            {
+                                                Icon: Phone,
+                                                label: 'Phone',
+                                                value: '(647) 265-8237',
+                                                href: 'tel:+16472658237'
+                                            },
+                                            {
+                                                Icon: MapPin,
+                                                label: 'Kitchen · pickup',
+                                                value: '75 Portland St., Toronto',
+                                                href: 'https://maps.google.com/?q=75+Portland+St,+Toronto,+ON+M5V+2M9'
+                                            }
+                                        ].map(({ Icon, label, value, href }) => (
+                                            <li key={label}>
+                                                <a
+                                                    href={href}
+                                                    className='group flex items-center gap-4 rounded-2xl border-2 border-white/30 bg-white/10 p-3 pr-4 transition hover:border-white hover:bg-white/20 focus-visible:ring-4 focus-visible:ring-white/40 focus-visible:outline-none'>
+                                                    <span className='text-pink-deep flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white shadow-sm'>
+                                                        <Icon className='h-5 w-5' aria-hidden />
                                                     </span>
-                                                    <span className='block truncate text-sm sm:text-base'>{value}</span>
-                                                </span>
-                                                <ArrowUpRight
-                                                    className='h-4 w-4 shrink-0 opacity-60 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:opacity-100'
-                                                    aria-hidden
-                                                />
-                                            </a>
-                                        </li>
-                                    ))}
-                                </ul>
-                                <div className='mt-6 sm:mt-8'>
-                                    <OrderSummary />
+                                                    <span className='min-w-0 flex-1'>
+                                                        <span className='block text-[11px] tracking-[0.2em] text-white/75 uppercase'>
+                                                            {label}
+                                                        </span>
+                                                        <span className='block truncate text-sm sm:text-base'>
+                                                            {value}
+                                                        </span>
+                                                    </span>
+                                                    <ArrowUpRight
+                                                        className='h-4 w-4 shrink-0 opacity-60 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:opacity-100'
+                                                        aria-hidden
+                                                    />
+                                                </a>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                    <div className='mt-6 sm:mt-8'>
+                                        <OrderSummary />
+                                    </div>
                                 </div>
-                            </div>
-                            <div className='bg-cream text-ink rounded-[2rem] border-[3px] border-white p-5 shadow-[8px_8px_0_rgba(255,255,255,0.45)] sm:p-10 sm:shadow-[10px_10px_0_rgba(255,255,255,0.45)]'>
-                                <InquiryForm />
+                                <div className='bg-cream text-ink rounded-[2rem] border-[3px] border-white p-5 shadow-[8px_8px_0_rgba(255,255,255,0.45)] sm:p-10 sm:shadow-[10px_10px_0_rgba(255,255,255,0.45)]'>
+                                    <InquiryForm />
+                                </div>
                             </div>
                         </div>
                     </section>

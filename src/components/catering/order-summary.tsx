@@ -3,7 +3,7 @@
 import { MIN_INDIVIDUAL_MEALS, formatCents } from '@/components/catering/menu-data';
 import { useOrder } from '@/components/catering/order-context';
 
-import { ShoppingBag, TriangleAlert, X } from 'lucide-react';
+import { ArrowUp, ShoppingBag, TriangleAlert, X } from 'lucide-react';
 
 /** Sticky bar under the menu: live item count + total, with a jump to the quote form. */
 export function OrderBar() {
@@ -53,20 +53,8 @@ export function OrderBar() {
 export function OrderSummary() {
     const { order, setQty, clear } = useOrder();
 
-    if (order.itemCount === 0) {
-        return (
-            <div className='rounded-2xl border-2 border-dashed border-white/50 p-5 text-sm text-white/90'>
-                <p className='font-medium text-white'>No dishes selected yet</p>
-                <p className='mt-1 text-xs leading-relaxed'>
-                    Pick dishes in the menu above to see your total here, or just tell us about your event and we’ll
-                    suggest a spread.
-                </p>
-                <a href='#menu' className='mt-3 inline-block text-xs underline underline-offset-4'>
-                    Build your spread →
-                </a>
-            </div>
-        );
-    }
+    // Nothing selected: the BuildFirstPrompt banner at the top of the quote section takes over.
+    if (order.itemCount === 0) return null;
 
     return (
         <div className='bg-cream text-ink rounded-2xl p-5'>
@@ -125,6 +113,36 @@ export function OrderSummary() {
                     have {order.individualMeals}.
                 </p>
             )}
+        </div>
+    );
+}
+
+/** Big banner at the top of the quote section while nothing is selected: build your spread first. */
+export function BuildFirstPrompt() {
+    const { order } = useOrder();
+    if (order.itemCount > 0) return null;
+
+    return (
+        <div className='bg-cream text-ink mb-8 flex flex-col gap-5 rounded-[2rem] border-[3px] border-white p-6 shadow-[8px_8px_0_rgba(255,255,255,0.45)] sm:mb-12 sm:p-8 md:flex-row md:items-center md:gap-8 lg:p-10'>
+            <span className='bg-pink-soft text-pink-deep flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl lg:h-20 lg:w-20'>
+                <ShoppingBag className='h-8 w-8 lg:h-10 lg:w-10' aria-hidden />
+            </span>
+            <div className='flex-1'>
+                <p className='text-pink-deep text-xs tracking-[0.2em] uppercase'>Step 1 of 2</p>
+                <h3 className='font-display text-pink-deep mt-1 text-3xl leading-none sm:text-5xl'>
+                    First, build your spread
+                </h3>
+                <p className='text-ink/70 mt-3 max-w-xl text-sm leading-relaxed sm:text-base'>
+                    Pick your boxes, platters and sides from the menu. Your total shows up here and is sent along with
+                    your request.
+                </p>
+            </div>
+            <a
+                href='#menu'
+                className='bg-pink focus-visible:ring-pink/30 inline-flex shrink-0 items-center justify-center gap-2 rounded-full px-7 py-4 text-white shadow-[0_4px_0_var(--baba-pink-deep)] transition hover:translate-y-0.5 hover:shadow-[0_2px_0_var(--baba-pink-deep)] focus-visible:ring-4 focus-visible:outline-none sm:text-lg'>
+                <ArrowUp className='h-5 w-5' aria-hidden />
+                Build your spread
+            </a>
         </div>
     );
 }

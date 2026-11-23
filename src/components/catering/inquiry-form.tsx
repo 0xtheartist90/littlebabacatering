@@ -160,12 +160,20 @@ export function InquiryForm() {
             </div>
             <div className='col-span-2 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center sm:justify-between'>
                 <p className='text-ink/60 text-xs'>Orders need at least 48 hours notice.</p>
-                <button
-                    type='submit'
-                    className='bg-pink focus-visible:ring-pink/30 rounded-full px-6 py-3.5 text-sm whitespace-nowrap text-white shadow-[0_4px_0_var(--baba-pink-deep)] transition hover:translate-y-0.5 hover:shadow-[0_2px_0_var(--baba-pink-deep)] focus-visible:ring-4 focus-visible:outline-none sm:px-8 sm:text-base'>
-                    {order.itemCount > 0 ? `Request order · ${formatCents(order.totalCents)}` : 'Send catering request'}{' '}
-                    →
-                </button>
+                {order.itemCount > 0 ? (
+                    <button
+                        type='submit'
+                        className='bg-pink focus-visible:ring-pink/30 rounded-full px-6 py-3.5 text-sm whitespace-nowrap text-white shadow-[0_4px_0_var(--baba-pink-deep)] transition hover:translate-y-0.5 hover:shadow-[0_2px_0_var(--baba-pink-deep)] focus-visible:ring-4 focus-visible:outline-none sm:px-8 sm:text-base'>
+                        Request order · {formatCents(order.totalCents)} →
+                    </button>
+                ) : (
+                    // Nothing picked yet: send people to the menu first instead of submitting an empty request.
+                    <a
+                        href='#menu'
+                        className='border-pink text-pink-deep hover:bg-pink focus-visible:ring-pink/30 rounded-full border-2 px-6 py-3.5 text-center text-sm whitespace-nowrap transition hover:text-white focus-visible:ring-4 focus-visible:outline-none sm:px-8 sm:text-base'>
+                        Build your spread first ↑
+                    </a>
+                )}
             </div>
         </form>
     );

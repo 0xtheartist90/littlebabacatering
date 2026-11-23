@@ -33,7 +33,7 @@ export function SiteFooter({ logoSrc }: { logoSrc: string }) {
                         <a
                             href='tel:+16472658237'
                             className='rounded-full border-2 border-white px-6 py-3 text-sm transition hover:bg-white/10 focus-visible:ring-4 focus-visible:ring-white/40 focus-visible:outline-none sm:px-7 sm:py-3.5'>
-                            Call (647) 265-8237
+                            Call us
                         </a>
                     </div>
                 </div>
