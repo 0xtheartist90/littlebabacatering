@@ -253,3 +253,8 @@ body {
   background-position: right 1rem center;
   background-size: 1.1rem;
 }
+
+/* Match littlebaba.com: display headings are set at weight 600 there */
+.font-display {
+  font-weight: 600;
+}

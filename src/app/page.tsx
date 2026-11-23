@@ -100,7 +100,7 @@ function PillLink({
     return (
         <a
             href={href}
-            className={`focus-visible:ring-pink/30 inline-flex items-center justify-center rounded-full text-center tracking-wide transition focus-visible:ring-4 focus-visible:outline-none ${size === 'sm' ? 'px-4 py-2 text-xs sm:px-6 sm:py-3 sm:text-sm' : 'px-6 py-3 text-sm sm:px-7 sm:py-3.5'} ${styles}`}>
+            className={`focus-visible:ring-pink/30 inline-flex items-center justify-center rounded-full text-center font-medium transition focus-visible:ring-4 focus-visible:outline-none ${size === 'sm' ? 'px-4 py-2 text-xs sm:px-6 sm:py-3 sm:text-sm' : 'px-6 py-3 text-sm sm:px-7 sm:py-3.5'} ${styles}`}>
             {children}
         </a>
     );
@@ -140,7 +140,7 @@ export default function CateringPage() {
                             <a
                                 key={href}
                                 href={href}
-                                className='hover:text-pink-deep underline-offset-8 transition hover:underline'>
+                                className='hover:text-pink-deep text-base font-bold underline-offset-8 transition hover:underline'>
                                 {label}
                             </a>
                         ))}

@@ -353,7 +353,7 @@ export function CateringMenu({ pdfHref }: { pdfHref: string }) {
                             <TabsPrimitive.Trigger
                                 key={c.id}
                                 value={c.id}
-                                className='group border-pink/40 text-pink-deep hover:border-pink data-[state=active]:bg-pink data-[state=active]:border-pink focus-visible:ring-pink/30 inline-flex shrink-0 items-center gap-2 rounded-full border-2 bg-white px-5 py-2 text-sm whitespace-nowrap transition outline-none focus-visible:ring-4 data-[state=active]:text-white'>
+                                className='group border-pink/40 text-pink-deep hover:border-pink data-[state=active]:bg-pink data-[state=active]:border-pink focus-visible:ring-pink/30 inline-flex shrink-0 items-center gap-2 rounded-full border-2 bg-white px-5 py-2 text-sm font-medium whitespace-nowrap transition outline-none focus-visible:ring-4 data-[state=active]:text-white'>
                                 {c.tab}
                                 {count > 0 && (
                                     <span className='bg-pink group-data-[state=active]:text-pink-deep min-w-5 rounded-full px-1.5 text-center text-[11px] leading-5 text-white tabular-nums group-data-[state=active]:bg-white'>
