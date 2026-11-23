@@ -3,7 +3,7 @@
 import { MIN_INDIVIDUAL_MEALS, formatCents } from '@/components/catering/menu-data';
 import { useOrder } from '@/components/catering/order-context';
 
-import { TriangleAlert, X } from 'lucide-react';
+import { ShoppingBag, TriangleAlert, X } from 'lucide-react';
 
 /** Sticky bar under the menu: live item count + total, with a jump to the quote form. */
 export function OrderBar() {
@@ -11,24 +11,36 @@ export function OrderBar() {
     if (order.itemCount === 0) return null;
 
     return (
-        <div className='sticky bottom-4 z-30 mt-6'>
-            <div className='bg-ink mx-auto flex max-w-3xl items-center justify-between gap-3 rounded-full py-2 pr-2 pl-5 text-white shadow-[0_10px_30px_rgba(0,0,0,0.25)] sm:py-2.5 sm:pr-2.5 sm:pl-6'>
-                <div className='min-w-0 text-xs sm:text-sm' aria-live='polite'>
-                    <span className='text-white/70'>
-                        {order.itemCount} item{order.itemCount === 1 ? '' : 's'} ·{' '}
-                    </span>
-                    <span className='font-medium'>{formatCents(order.totalCents)}</span>
-                    <span className='text-white/60'> incl. HST</span>
-                    <br className='sm:hidden' />
-                    {order.belowMinimum && (
-                        <span className='text-pink-soft inline-flex items-center gap-1 text-[11px] sm:ml-2 sm:text-xs'>
-                            <TriangleAlert className='h-3.5 w-3.5' aria-hidden /> min. {MIN_INDIVIDUAL_MEALS} lunches
+        <div className='sticky bottom-4 z-30 mt-5'>
+            <div className='border-pink/30 text-ink mx-auto flex max-w-2xl items-center justify-between gap-3 rounded-full border-2 bg-white py-2 pr-2 pl-2 shadow-[0_12px_32px_rgba(239,80,138,0.25)]'>
+                <div className='flex min-w-0 items-center gap-3' aria-live='polite'>
+                    <span className='bg-pink-soft text-pink-deep relative flex h-10 w-10 shrink-0 items-center justify-center rounded-full'>
+                        <ShoppingBag className='h-5 w-5' aria-hidden />
+                        <span className='bg-pink absolute -top-1 -right-1 min-w-5 rounded-full px-1 text-center text-[10px] leading-5 text-white tabular-nums'>
+                            {order.itemCount}
                         </span>
-                    )}
+                    </span>
+                    <span className='min-w-0 leading-tight'>
+                        <span className='text-pink-deep block text-base font-medium tabular-nums sm:text-lg'>
+                            {formatCents(order.totalCents)}
+                        </span>
+                        <span className='text-ink/55 block truncate text-[11px] sm:text-xs'>
+                            {order.belowMinimum ? (
+                                <span className='text-pink-deep inline-flex items-center gap-1'>
+                                    <TriangleAlert className='h-3.5 w-3.5' aria-hidden /> Min. {MIN_INDIVIDUAL_MEALS}{' '}
+                                    lunches
+                                </span>
+                            ) : (
+                                <>
+                                    {order.itemCount} item{order.itemCount === 1 ? '' : 's'} · incl. HST
+                                </>
+                            )}
+                        </span>
+                    </span>
                 </div>
                 <a
                     href='#quote'
-                    className='bg-pink focus-visible:ring-pink/40 shrink-0 rounded-full px-4 py-2.5 text-sm transition hover:brightness-110 focus-visible:ring-4 focus-visible:outline-none sm:px-5'>
+                    className='bg-pink focus-visible:ring-pink/40 shrink-0 rounded-full px-4 py-2.5 text-sm text-white transition hover:brightness-110 focus-visible:ring-4 focus-visible:outline-none sm:px-6 sm:py-3'>
                     <span className='sm:hidden'>Request →</span>
                     <span className='hidden sm:inline'>Request this order →</span>
                 </a>

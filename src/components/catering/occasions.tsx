@@ -42,9 +42,7 @@ export function Occasions() {
     return (
         <section className='bg-pink relative overflow-hidden text-white' aria-labelledby='occasions-title'>
             <div className='mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-20 lg:py-28'>
-                <h2
-                    id='occasions-title'
-                    className='font-display mb-8 text-4xl leading-[0.95] sm:mb-12 sm:text-6xl'>
+                <h2 id='occasions-title' className='font-display mb-8 text-4xl leading-[0.95] sm:mb-12 sm:text-6xl'>
                     Made for every kind of table.
                 </h2>
 
@@ -55,7 +53,7 @@ export function Occasions() {
                             className={`w-[80%] shrink-0 snap-start sm:w-auto ${i % 2 === 1 ? 'xl:translate-y-8' : ''}`}>
                             <a
                                 href={`#menu-${tab}`}
-                                className='group relative block aspect-[3/4] sm:aspect-[4/3] xl:aspect-[3/4] overflow-hidden rounded-[2rem] shadow-[8px_8px_0_rgba(0,0,0,0.12)] transition duration-300 focus-visible:ring-4 focus-visible:ring-white/60 focus-visible:outline-none sm:hover:-translate-y-1.5'>
+                                className='group relative block aspect-[3/4] overflow-hidden rounded-[2rem] shadow-[8px_8px_0_rgba(0,0,0,0.12)] transition duration-300 focus-visible:ring-4 focus-visible:ring-white/60 focus-visible:outline-none sm:aspect-[4/3] sm:hover:-translate-y-1.5 xl:aspect-[3/4]'>
                                 <Image
                                     src={photo}
                                     alt=''
@@ -76,7 +74,7 @@ export function Occasions() {
                                         {title}
                                     </h3>
                                     <p className='text-ink/70 mt-1.5 text-xs leading-relaxed'>{text}</p>
-                                    <span className='bg-pink mt-3 inline-flex items-center gap-1.5 rounded-full whitespace-nowrap py-1.5 pr-3 pl-3.5 text-xs text-white transition group-hover:gap-2.5'>
+                                    <span className='bg-pink mt-3 inline-flex items-center gap-1.5 rounded-full py-1.5 pr-3 pl-3.5 text-xs whitespace-nowrap text-white transition group-hover:gap-2.5'>
                                         Our pick: <span className='font-medium'>{pick}</span>
                                         <ArrowRight className='h-3.5 w-3.5' aria-hidden />
                                     </span>

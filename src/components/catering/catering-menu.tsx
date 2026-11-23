@@ -16,7 +16,7 @@ import { useOrder } from '@/components/catering/order-context';
 import { OrderBar } from '@/components/catering/order-summary';
 import * as TabsPrimitive from '@radix-ui/react-tabs';
 
-import { Carrot, Clock, Leaf, Milk, Minus, Plus, UtensilsCrossed, Wheat, X } from 'lucide-react';
+import { Carrot, Download, Leaf, Milk, Minus, Plus, Wheat, X } from 'lucide-react';
 
 const diets: Record<Diet, { label: string; Icon: typeof Leaf }> = {
     VG: { label: 'Vegan', Icon: Leaf },
@@ -388,54 +388,26 @@ export function CateringMenu({ pdfHref }: { pdfHref: string }) {
             {/* Live total */}
             <OrderBar />
 
-            {/* Legend + price note */}
-            <div className='text-ink/70 mt-4 flex flex-col gap-3 text-xs sm:flex-row sm:items-center sm:justify-between'>
+            {/* One quiet line: dietary legend, price note and the PDF */}
+            <div className='text-ink/60 mt-5 flex flex-col gap-3 text-xs md:flex-row md:items-center md:justify-between'>
                 <ul className='flex flex-wrap gap-x-5 gap-y-2' aria-label='Dietary labels'>
                     {(Object.keys(diets) as Diet[]).map((k) => (
-                        <li key={k} className='flex items-center gap-1.5'>
+                        <li key={k}>
                             <DietIcon t={k} withLabel />
                         </li>
                     ))}
                 </ul>
-                <p>Prices in CAD, excluding HST, delivery and optional serviceware.</p>
+                <p className='flex flex-wrap items-center gap-x-3 gap-y-1'>
+                    <span>Prices in CAD, excl. HST and delivery</span>
+                    <span aria-hidden>·</span>
+                    <a
+                        href={pdfHref}
+                        className='hover:text-pink-deep inline-flex items-center gap-1 underline underline-offset-4'>
+                        <Download className='h-3.5 w-3.5' aria-hidden />
+                        Menu PDF
+                    </a>
+                </p>
             </div>
-
-            {/* Good to know */}
-            <ul className='bg-cream border-pink/25 mt-6 grid gap-5 rounded-3xl border-2 p-6 text-sm sm:p-7 md:grid-cols-3'>
-                {[
-                    {
-                        Icon: Clock,
-                        title: 'Order 48 hours ahead',
-                        text: 'Pickup and Toronto delivery available. Delivery minimums and fees depend on location.'
-                    },
-                    {
-                        Icon: Leaf,
-                        title: 'Dietary needs',
-                        text: 'Vegetarian, vegan, gluten-free and dairy-free ingredients. Please advise us of allergies.'
-                    },
-                    {
-                        Icon: UtensilsCrossed,
-                        title: 'Serviceware',
-                        text: 'Napkins, cutlery and serving utensils are available on request.'
-                    }
-                ].map(({ Icon, title, text }) => (
-                    <li key={title} className='flex gap-3'>
-                        <span className='bg-pink flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-white'>
-                            <Icon className='h-4 w-4' aria-hidden />
-                        </span>
-                        <div>
-                            <p className='font-medium'>{title}</p>
-                            <p className='text-ink/70 mt-0.5 text-xs leading-relaxed'>{text}</p>
-                        </div>
-                    </li>
-                ))}
-            </ul>
-
-            <p className='mt-5 text-center'>
-                <a href={pdfHref} className='text-ink/50 hover:text-pink-deep text-xs underline underline-offset-4'>
-                    Download the menu as PDF
-                </a>
-            </p>
         </div>
     );
 }

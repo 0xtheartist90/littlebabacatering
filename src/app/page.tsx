@@ -227,10 +227,6 @@ export default function CateringPage() {
                             </div>
 
                             <CateringMenu pdfHref={CATERING_MENU_PDF} />
-
-                            <div className='mt-10 text-center'>
-                                <PillLink href='#quote'>Request a quote</PillLink>
-                            </div>
                         </div>
                     </section>
 
@@ -319,21 +315,23 @@ export default function CateringPage() {
                             sizes='100vw'
                             className='pointer-events-none absolute inset-x-0 bottom-0 w-full opacity-60 select-none'
                         />
-                        <div className='relative mx-auto max-w-3xl px-4 pt-14 pb-[14vw] sm:px-6 sm:pt-20 lg:pt-24 lg:pb-[9vw]'>
-                            <h2 id='faq-title' className='font-display text-pink text-center text-4xl sm:text-6xl'>
+                        <div className='relative mx-auto grid max-w-6xl gap-6 px-4 pt-12 pb-[12vw] sm:px-6 sm:pt-16 md:grid-cols-[0.7fr_1.3fr] md:gap-10 lg:pt-20 lg:pb-[7vw]'>
+                            <h2
+                                id='faq-title'
+                                className='font-display text-pink text-4xl leading-[0.95] sm:text-6xl md:pt-2'>
                                 Good questions
                             </h2>
-                            <div className='bg-cream/90 border-pink/20 mt-8 rounded-3xl border-2 px-5 py-2 shadow-[0_10px_40px_rgba(239,80,138,0.12)] backdrop-blur-sm sm:mt-10 sm:px-8'>
+                            <div className='bg-cream/90 border-pink/20 rounded-3xl border-2 px-5 py-1 shadow-[0_10px_40px_rgba(239,80,138,0.12)] backdrop-blur-sm sm:px-7'>
                                 <Accordion type='single' collapsible>
                                     {faqs.map((f, i) => (
                                         <AccordionItem
                                             key={f.q}
                                             value={`f${i}`}
                                             className='border-pink/30 border-b-2 border-dashed last:border-b-0'>
-                                            <AccordionTrigger className='text-ink [&>svg]:text-pink py-5 text-base hover:no-underline'>
+                                            <AccordionTrigger className='text-ink [&>svg]:text-pink py-3.5 text-sm hover:no-underline sm:text-[15px]'>
                                                 {f.q}
                                             </AccordionTrigger>
-                                            <AccordionContent className='text-ink/75 text-sm leading-relaxed'>
+                                            <AccordionContent className='text-ink/75 pb-3.5 text-sm leading-relaxed'>
                                                 {f.a}
                                             </AccordionContent>
                                         </AccordionItem>

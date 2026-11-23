@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-import { ArrowRight, ChefHat, Clock, MessageCircleHeart, Truck } from 'lucide-react';
+import { ArrowRight, ChefHat, MessageCircleHeart, Truck } from 'lucide-react';
 
 const steps = [
     {
@@ -68,11 +68,7 @@ export function HowItWorks({ mascotSrc }: { mascotSrc: string }) {
                     ))}
                 </ol>
 
-                <div className='mt-10 flex items-end justify-between gap-6 sm:mt-14'>
-                    <p className='text-pink-deep inline-flex items-center gap-2 rounded-2xl bg-white px-4 py-2.5 text-xs shadow-sm sm:rounded-full sm:px-5 sm:text-sm'>
-                        <Clock className='h-4 w-4 shrink-0' aria-hidden />
-                        Catering orders must be placed 48 hours in advance.
-                    </p>
+                <div className='mt-6 hidden justify-end md:flex'>
                     <Image
                         src={mascotSrc}
                         alt=''
