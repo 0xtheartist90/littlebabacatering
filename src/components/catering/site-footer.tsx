@@ -24,8 +24,7 @@ export function SiteFooter({ logoSrc }: { logoSrc: string }) {
                 {/* Call to action */}
                 <div className='flex flex-col gap-6 border-b-2 border-dashed border-white/40 py-10 sm:py-14 md:flex-row md:items-center md:justify-between'>
                     <h2 className='font-display text-4xl leading-none sm:text-6xl'>
-                        Hungry for
-                        <br className='hidden sm:block' /> a quote?
+                        Hungry for a quote?
                     </h2>
                     <div className='flex flex-wrap items-center gap-3'>
                         <a
