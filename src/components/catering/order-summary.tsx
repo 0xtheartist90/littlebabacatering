@@ -12,7 +12,7 @@ export function OrderBar() {
 
     return (
         <div className='sticky bottom-4 z-30 mt-5'>
-            <div className='border-pink/30 text-ink mx-auto flex max-w-2xl items-center justify-between gap-3 rounded-full border-2 bg-white py-2 pr-2 pl-2 shadow-[0_12px_32px_rgba(239,80,138,0.25)]'>
+            <div className='border-pink/30 text-ink flex w-full items-center justify-between gap-3 rounded-3xl border-2 bg-white p-2.5 pl-3 shadow-[0_12px_32px_rgba(239,80,138,0.25)] sm:p-3 sm:pl-4'>
                 <div className='flex min-w-0 items-center gap-3' aria-live='polite'>
                     <span className='bg-pink-soft text-pink-deep relative flex h-10 w-10 shrink-0 items-center justify-center rounded-full'>
                         <ShoppingBag className='h-5 w-5' aria-hidden />

@@ -315,13 +315,13 @@ export default function CateringPage() {
                             sizes='100vw'
                             className='pointer-events-none absolute inset-x-0 bottom-0 w-full opacity-60 select-none'
                         />
-                        <div className='relative mx-auto grid max-w-6xl gap-6 px-4 pt-12 pb-[12vw] sm:px-6 sm:pt-16 md:grid-cols-[0.7fr_1.3fr] md:gap-10 lg:pt-20 lg:pb-[7vw]'>
-                            <h2
-                                id='faq-title'
-                                className='font-display text-pink text-4xl leading-[0.95] sm:text-6xl md:pt-2'>
-                                Good questions
-                            </h2>
-                            <div className='bg-cream/90 border-pink/20 rounded-3xl border-2 px-5 py-1 shadow-[0_10px_40px_rgba(239,80,138,0.12)] backdrop-blur-sm sm:px-7'>
+                        <div className='relative mx-auto max-w-6xl px-4 pt-12 pb-[12vw] sm:px-6 sm:pt-16 lg:pt-20 lg:pb-[7vw]'>
+                            <div className='bg-cream/95 border-pink/20 grid gap-2 rounded-3xl border-2 px-5 pt-6 pb-1 shadow-[0_10px_40px_rgba(239,80,138,0.12)] backdrop-blur-sm sm:px-8 sm:pt-8 md:grid-cols-[0.6fr_1.4fr] md:gap-10 md:py-6'>
+                                <h2
+                                    id='faq-title'
+                                    className='font-display text-pink text-4xl leading-[0.95] sm:text-5xl md:pt-3'>
+                                    Good questions
+                                </h2>
                                 <Accordion type='single' collapsible>
                                     {faqs.map((f, i) => (
                                         <AccordionItem
