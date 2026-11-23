@@ -182,10 +182,7 @@ export default function CateringPage() {
                                         celebrations. Pickup or delivery across Toronto.
                                     </p>
                                     <div className='mt-5 flex flex-wrap gap-3 sm:mt-7 sm:pr-28'>
-                                        <PillLink href='#quote'>Plan my catering</PillLink>
-                                        <PillLink href='#menu' variant='outline'>
-                                            See menu & prices
-                                        </PillLink>
+                                        <PillLink href='#menu'>Plan my catering</PillLink>
                                     </div>
                                     <Image
                                         src={img.mascotWalk}
