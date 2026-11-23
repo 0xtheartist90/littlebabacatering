@@ -9,6 +9,7 @@ import {
     type ItemOption,
     type MenuItem,
     categories,
+    dishImages,
     itemKey,
     variantLabel
 } from '@/components/catering/menu-data';
@@ -94,33 +95,41 @@ function Stepper({ id, name }: { id: string; name: string }) {
     );
 }
 
-function Row({ categoryId, item }: { categoryId: string; item: MenuItem }) {
+function Row({ categoryId, item, compact = false }: { categoryId: string; item: MenuItem; compact?: boolean }) {
     const { quantities } = useOrder();
     const id = itemKey(categoryId, item.name);
     const selected = (quantities[id] ?? 0) > 0;
 
     return (
         <li
-            className={`-mx-3 flex items-center gap-3 rounded-xl px-3 py-2.5 transition ${selected ? 'bg-pink-soft/35' : ''}`}>
-            <ItemInfo item={item} />
+            className={`-mx-3 flex items-center gap-3 rounded-xl px-3 transition ${compact ? 'py-1.5' : 'py-2.5'} ${selected ? 'bg-pink-soft/35' : ''}`}>
+            <ItemInfo item={item} image={dishImages[id]} compact={compact} />
             <Stepper id={id} name={item.name} />
         </li>
     );
 }
 
 /** Header shared by plain rows and rows with options: name, diet icons, price and description. */
-function ItemInfo({ item }: { item: MenuItem }) {
+function ItemInfo({ item, image, compact = false }: { item: MenuItem; image?: string; compact?: boolean }) {
     return (
-        <div className='min-w-0 flex-1'>
-            <div className='flex items-center gap-1'>
-                <span className='mr-0.5 text-[13px] font-medium tracking-wide uppercase'>{item.name}</span>
-                {item.tags?.map((t) => (
-                    <DietIcon key={t} t={t} />
-                ))}
-                <span className='border-ink/20 mx-1 min-w-3 flex-1 border-b border-dotted' aria-hidden />
-                <span className='text-pink-deep text-[13px] font-medium tabular-nums'>${item.price}</span>
+        <div className='flex min-w-0 flex-1 items-center gap-3'>
+            {image && (
+                <span
+                    className={`bg-pink-soft/40 relative shrink-0 overflow-hidden ${compact ? 'h-10 w-10 rounded-lg' : 'h-14 w-14 rounded-xl sm:h-16 sm:w-16'}`}>
+                    <Image src={image} alt='' fill sizes='64px' className='object-cover' />
+                </span>
+            )}
+            <div className='min-w-0 flex-1'>
+                <div className='flex items-center gap-1'>
+                    <span className='mr-0.5 text-[13px] font-medium tracking-wide uppercase'>{item.name}</span>
+                    {item.tags?.map((t) => (
+                        <DietIcon key={t} t={t} />
+                    ))}
+                    <span className='border-ink/20 mx-1 min-w-3 flex-1 border-b border-dotted' aria-hidden />
+                    <span className='text-pink-deep text-[13px] font-medium tabular-nums'>${item.price}</span>
+                </div>
+                {item.desc && <p className='text-ink/60 mt-1 text-xs leading-relaxed'>{item.desc}</p>}
             </div>
-            {item.desc && <p className='text-ink/60 mt-1 text-xs leading-relaxed'>{item.desc}</p>}
         </div>
     );
 }
@@ -318,7 +327,7 @@ export function CateringMenu({ pdfHref }: { pdfHref: string }) {
                             forceMount
                             inert={activeTab !== c.id}
                             className='min-w-0 outline-none [grid-area:1/1] data-[state=inactive]:hidden md:data-[state=inactive]:invisible md:data-[state=inactive]:block'>
-                            <article className='border-pink/25 grid h-full grid-cols-1 overflow-clip rounded-3xl border-2 bg-white md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] xl:grid-cols-[minmax(0,0.88fr)_minmax(0,1.12fr)]'>
+                            <article className='border-pink/25 grid h-full grid-cols-1 overflow-clip rounded-3xl border-2 bg-white md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] xl:grid-cols-[minmax(0,0.84fr)_minmax(0,1.16fr)]'>
                                 <div
                                     className={`relative md:sticky md:top-36 md:aspect-[3/4] md:self-start xl:relative xl:top-0 xl:aspect-auto xl:min-h-[440px] xl:self-stretch ${c.video ? 'aspect-[3/4]' : 'aspect-[4/3]'}`}>
                                     {c.video ? (
@@ -371,7 +380,12 @@ export function CateringMenu({ pdfHref }: { pdfHref: string }) {
                                                                 options={c.options}
                                                             />
                                                         ) : (
-                                                            <Row key={it.name} categoryId={c.id} item={it} />
+                                                            <Row
+                                                                key={it.name}
+                                                                categoryId={c.id}
+                                                                item={it}
+                                                                compact={c.columns === 2}
+                                                            />
                                                         )
                                                     )}
                                                 </ul>

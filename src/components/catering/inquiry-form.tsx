@@ -35,6 +35,7 @@ export function InquiryForm() {
             `Email: ${get('email')}`,
             `Phone: ${get('phone') || '—'}`,
             `Event date: ${get('date')}`,
+            `Event time: ${get('time')}`,
             `Number of guests: ${get('guests')}`,
             `Occasion: ${get('occasion')}`,
             `Pickup or delivery: ${service}`,
@@ -64,7 +65,7 @@ export function InquiryForm() {
             return;
         }
 
-        const subject = `Catering inquiry – ${get('occasion')} – ${get('date')} (${get('guests')} guests)`;
+        const subject = `Catering inquiry – ${get('occasion')} – ${get('date')} ${get('time')} (${get('guests')} guests)`;
 
         window.location.href = `mailto:${CATERING_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
         toast.success('Your email app is opening with your request — just hit send!');
@@ -103,6 +104,12 @@ export function InquiryForm() {
                 <input id='date' name='date' type='date' required min={minDate()} className={fieldClass} />
             </div>
             <div>
+                <label htmlFor='time' className={labelClass}>
+                    Event time *
+                </label>
+                <input id='time' name='time' type='time' required step={900} className={fieldClass} />
+            </div>
+            <div className='col-span-2 sm:col-span-1'>
                 <label htmlFor='guests' className={labelClass}>
                     Guests *
                 </label>
@@ -124,7 +131,7 @@ export function InquiryForm() {
                     <option>Something else</option>
                 </select>
             </div>
-            <fieldset className='col-span-2 sm:col-span-1'>
+            <fieldset className='col-span-2'>
                 <legend className={labelClass}>Pickup or delivery</legend>
                 <div className='border-pink/40 grid grid-cols-2 gap-2 rounded-full border-2 bg-white p-1'>
                     {(['Delivery', 'Pickup'] as const).map((opt) => (

@@ -203,6 +203,29 @@ export const categories: Category[] = [
     }
 ];
 
+/** Per-dish photos (from Little Baba's online ordering menu), keyed by itemKey(). */
+const D = '/images/dishes';
+export const dishImages: Record<string, string> = {
+    'wrap-combos/Chicken Shawarma': `${D}/wrap-shawarma.jpg`,
+    'wrap-combos/Chicken Tawook': `${D}/wrap-tawook.jpg`,
+    'wrap-combos/Kefta Beef & Lamb': `${D}/wrap-kefta.jpg`,
+    'wrap-combos/Falafel': `${D}/wrap-falafel.png`,
+    'wrap-combos/Fried Cauliflower': `${D}/wrap-cauliflower.jpg`,
+    'platters/Little Bites Platter': `${D}/little-bites-platter.jpg`,
+    'platters/Platter for 5–6': `${D}/platter-5-6.jpg`,
+    'platters/Platter for 10': `${D}/platter-10.jpg`,
+    'feasts/Classic Baba Feast': `${D}/classic-feast.jpg`,
+    'feasts/Mixed Grill Baba Feast': `${D}/mixed-grill-feast.jpg`,
+    'sides/Fattoush': `${D}/fattoush.jpg`,
+    'sides/Chickpea': `${D}/chickpea-salad.jpg`,
+    'sides/Hummus': `${D}/hummus.jpg`,
+    'sides/Baba Ghanoush': `${D}/baba-ghanoush.jpg`,
+    'sides/Baba Rice': `${D}/baba-rice.jpg`,
+    'sides/Golden Fries': `${D}/golden-fries.jpg`,
+    'sides/10 Falafel w/ Tahini': `${D}/falafel-10.jpg`,
+    'sides/Cookies': `${D}/date-cookie.jpg`
+};
+
 /** Ontario HST. Catering prices on the menu exclude it. */
 export const HST_RATE = 0.13;
 
