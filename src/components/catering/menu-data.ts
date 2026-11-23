@@ -209,7 +209,7 @@ export const dishImages: Record<string, string> = {
     'wrap-combos/Chicken Shawarma': `${D}/wrap-shawarma.jpg`,
     'wrap-combos/Chicken Tawook': `${D}/wrap-tawook.jpg`,
     'wrap-combos/Kefta Beef & Lamb': `${D}/wrap-kefta.jpg`,
-    'wrap-combos/Falafel': `${D}/wrap-falafel.png`,
+    'wrap-combos/Falafel': `${D}/wrap-falafel.jpg`,
     'wrap-combos/Fried Cauliflower': `${D}/wrap-cauliflower.jpg`,
     'platters/Little Bites Platter': `${D}/little-bites-platter.jpg`,
     'platters/Platter for 5–6': `${D}/platter-5-6.jpg`,

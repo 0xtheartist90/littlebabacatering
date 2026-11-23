@@ -15,9 +15,10 @@ import {
 } from '@/components/catering/menu-data';
 import { useOrder } from '@/components/catering/order-context';
 import { OrderBar } from '@/components/catering/order-summary';
+import * as DialogPrimitive from '@radix-ui/react-dialog';
 import * as TabsPrimitive from '@radix-ui/react-tabs';
 
-import { Carrot, Download, Leaf, Milk, Minus, Plus, Wheat, X } from 'lucide-react';
+import { Carrot, Download, Leaf, Milk, Minus, Plus, Wheat, X, ZoomIn } from 'lucide-react';
 
 const diets: Record<Diet, { label: string; Icon: typeof Leaf }> = {
     VG: { label: 'Vegan', Icon: Leaf },
@@ -109,16 +110,58 @@ function Row({ categoryId, item, compact = false }: { categoryId: string; item: 
     );
 }
 
+/** Dish thumbnail; click to see the photo full size. */
+function DishPhoto({ src, name, compact }: { src: string; name: string; compact: boolean }) {
+    return (
+        <DialogPrimitive.Root>
+            <DialogPrimitive.Trigger
+                aria-label={`View photo of ${name}`}
+                className={`group/photo bg-pink-soft/40 focus-visible:ring-pink/40 relative shrink-0 cursor-zoom-in overflow-hidden focus-visible:ring-4 focus-visible:outline-none ${
+                    compact ? 'h-16 w-16 rounded-xl' : 'h-20 w-20 rounded-2xl sm:h-24 sm:w-24'
+                }`}>
+                <Image
+                    src={src}
+                    alt=''
+                    fill
+                    sizes='96px'
+                    className='object-cover transition duration-300 group-hover/photo:scale-110'
+                />
+                <span className='bg-ink/0 group-hover/photo:bg-ink/25 absolute inset-0 flex items-center justify-center text-white opacity-0 transition group-hover/photo:opacity-100'>
+                    <ZoomIn className='h-5 w-5' aria-hidden />
+                </span>
+            </DialogPrimitive.Trigger>
+            <DialogPrimitive.Portal>
+                <DialogPrimitive.Overlay className='data-[state=open]:animate-in data-[state=open]:fade-in-0 fixed inset-0 z-50 bg-black/85' />
+                <DialogPrimitive.Content className='data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95 fixed inset-0 z-50 flex flex-col items-center justify-center gap-4 p-4 outline-none sm:p-10'>
+                    <DialogPrimitive.Title className='font-display order-last text-2xl text-white sm:text-3xl'>
+                        {name}
+                    </DialogPrimitive.Title>
+                    <div className='relative aspect-square w-full max-w-[min(90vw,calc(100svh-9rem))]'>
+                        <Image
+                            src={src}
+                            alt={name}
+                            fill
+                            sizes='(min-width: 1024px) 900px, 90vw'
+                            quality={90}
+                            className='rounded-2xl object-contain'
+                        />
+                    </div>
+                    <DialogPrimitive.Close
+                        aria-label='Close'
+                        className='text-ink absolute top-4 right-4 flex h-11 w-11 items-center justify-center rounded-full bg-white shadow-lg transition hover:scale-105 focus-visible:ring-4 focus-visible:ring-white/50 focus-visible:outline-none'>
+                        <X className='h-5 w-5' aria-hidden />
+                    </DialogPrimitive.Close>
+                </DialogPrimitive.Content>
+            </DialogPrimitive.Portal>
+        </DialogPrimitive.Root>
+    );
+}
+
 /** Header shared by plain rows and rows with options: name, diet icons, price and description. */
 function ItemInfo({ item, image, compact = false }: { item: MenuItem; image?: string; compact?: boolean }) {
     return (
         <div className='flex min-w-0 flex-1 items-center gap-3'>
-            {image && (
-                <span
-                    className={`bg-pink-soft/40 relative shrink-0 overflow-hidden ${compact ? 'h-10 w-10 rounded-lg' : 'h-14 w-14 rounded-xl sm:h-16 sm:w-16'}`}>
-                    <Image src={image} alt='' fill sizes='64px' className='object-cover' />
-                </span>
-            )}
+            {image && <DishPhoto src={image} name={item.name} compact={compact} />}
             <div className='min-w-0 flex-1'>
                 <div className='flex items-center gap-1'>
                     <span className='mr-0.5 text-[13px] font-medium tracking-wide uppercase'>{item.name}</span>
@@ -327,30 +370,33 @@ export function CateringMenu({ pdfHref }: { pdfHref: string }) {
                             forceMount
                             inert={activeTab !== c.id}
                             className='min-w-0 outline-none [grid-area:1/1] data-[state=inactive]:hidden md:data-[state=inactive]:invisible md:data-[state=inactive]:block'>
-                            <article className='border-pink/25 grid h-full grid-cols-1 overflow-clip rounded-3xl border-2 bg-white md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] xl:grid-cols-[minmax(0,0.84fr)_minmax(0,1.16fr)]'>
-                                <div
-                                    className={`relative md:sticky md:top-36 md:aspect-[3/4] md:self-start xl:relative xl:top-0 xl:aspect-auto xl:min-h-[440px] xl:self-stretch ${c.video ? 'aspect-[3/4]' : 'aspect-[4/3]'}`}>
-                                    {c.video ? (
-                                        <video
-                                            src={c.video}
-                                            autoPlay
-                                            muted
-                                            loop
-                                            playsInline
-                                            aria-label={c.photoAlt}
-                                            className='absolute inset-0 h-full w-full object-cover'
-                                        />
-                                    ) : (
-                                        <Image
-                                            src={c.photo}
-                                            alt={c.photoAlt}
-                                            fill
-                                            sizes='(min-width: 768px) 90vw, 100vw'
-                                            quality={90}
-                                            className='object-cover'
-                                        />
-                                    )}
-                                </div>
+                            <article
+                                className={`border-pink/25 grid h-full grid-cols-1 overflow-clip rounded-3xl border-2 bg-white ${c.columns === 2 ? '' : 'md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] xl:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]'}`}>
+                                {c.columns !== 2 && (
+                                    <div
+                                        className={`relative md:sticky md:top-36 md:aspect-[3/4] md:self-start xl:relative xl:top-0 xl:aspect-auto xl:min-h-[440px] xl:self-stretch ${c.video ? 'aspect-[3/4]' : 'aspect-[4/3]'}`}>
+                                        {c.video ? (
+                                            <video
+                                                src={c.video}
+                                                autoPlay
+                                                muted
+                                                loop
+                                                playsInline
+                                                aria-label={c.photoAlt}
+                                                className='absolute inset-0 h-full w-full object-cover'
+                                            />
+                                        ) : (
+                                            <Image
+                                                src={c.photo}
+                                                alt={c.photoAlt}
+                                                fill
+                                                sizes='(min-width: 768px) 90vw, 100vw'
+                                                quality={90}
+                                                className='object-cover'
+                                            />
+                                        )}
+                                    </div>
+                                )}
                                 <div className='min-w-0 p-5 sm:p-8'>
                                     <div className='flex flex-wrap items-center justify-between gap-3'>
                                         <h3 className='font-display text-pink-deep text-3xl leading-tight sm:text-4xl'>
@@ -362,9 +408,15 @@ export function CateringMenu({ pdfHref }: { pdfHref: string }) {
                                     </div>
                                     <p className='text-ink/70 mt-2 text-xs leading-relaxed sm:text-[13px]'>{c.intro}</p>
                                     <div
-                                        className={`mt-4 grid gap-x-8 gap-y-5 ${c.columns === 2 ? 'lg:grid-cols-2' : ''}`}>
+                                        className={
+                                            c.columns === 2
+                                                ? 'mt-5 gap-x-10 md:columns-2 xl:columns-3'
+                                                : 'mt-4 grid gap-y-5'
+                                        }>
                                         {c.groups.map((g, i) => (
-                                            <div key={g.title ?? i}>
+                                            <div
+                                                key={g.title ?? i}
+                                                className={c.columns === 2 ? 'mb-5 break-inside-avoid' : ''}>
                                                 {g.title && (
                                                     <h4 className='text-pink-deep border-pink/25 mb-1 border-b-2 pb-1.5 text-xs font-medium tracking-[0.2em] uppercase'>
                                                         {g.title}

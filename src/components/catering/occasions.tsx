@@ -7,7 +7,7 @@ const occasions = [
     {
         title: 'Office lunches',
         text: 'Individually packed boxes, one per person. No serving, no mess, everyone gets their own.',
-        photo: '/images/dishes/baba-box.png',
+        photo: '/images/dishes/baba-box.jpg',
         pick: 'Baba Box',
         tab: 'baba-box'
     },

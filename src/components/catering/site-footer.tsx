@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-import { ArrowUp, Clock, Instagram, Mail, MapPin, Phone } from 'lucide-react';
+import { ArrowUp, ArrowUpRight, Clock, Instagram, Mail, MapPin, Phone } from 'lucide-react';
 
 function TikTokIcon({ className }: { className?: string }) {
     return (
@@ -13,6 +13,17 @@ function TikTokIcon({ className }: { className?: string }) {
 const socials = [
     { href: 'https://www.instagram.com/littlebaba.to/', label: 'Instagram', Icon: Instagram },
     { href: 'https://www.tiktok.com/@littlebaba.to', label: 'TikTok', Icon: TikTokIcon }
+];
+
+const contacts = [
+    {
+        Icon: MapPin,
+        label: 'Kitchen · pickup',
+        value: '75 Portland St., Toronto',
+        href: 'https://maps.google.com/?q=75+Portland+St,+Toronto,+ON+M5V+2M9'
+    },
+    { Icon: Mail, label: 'Email', value: 'info@littlebaba.com', href: 'mailto:info@littlebaba.com' },
+    { Icon: Phone, label: 'Phone', value: '(647) 265-8237', href: 'tel:+16472658237' }
 ];
 
 const linkClass = 'underline-offset-4 transition hover:underline';
@@ -39,8 +50,8 @@ export function SiteFooter({ logoSrc }: { logoSrc: string }) {
                 </div>
 
                 {/* Info grid */}
-                <div className='grid grid-cols-2 gap-x-6 gap-y-8 py-10 sm:py-14 md:grid-cols-[1.4fr_1fr_1fr_1fr] md:gap-10'>
-                    <div className='col-span-2 md:col-span-1'>
+                <div className='grid gap-8 py-10 sm:py-14 md:grid-cols-[1.2fr_1.3fr_1fr] md:gap-10'>
+                    <div>
                         <Image
                             src={logoSrc}
                             alt='Little Baba'
@@ -52,49 +63,40 @@ export function SiteFooter({ logoSrc }: { logoSrc: string }) {
                             Fresh food. Real ingredients. Big flavour. Signature Lebanese dishes for your office, party
                             or family table.
                         </p>
-                    </div>
-
-                    <div>
-                        <h3 className='mb-3 text-xs tracking-[0.2em] text-white/75 uppercase'>Opening hours</h3>
-                        <p className='flex items-start gap-2 text-sm'>
-                            <Clock className='mt-0.5 h-4 w-4 shrink-0' aria-hidden />
-                            <span>
-                                Every day
-                                <br />
-                                12PM – 10PM
-                            </span>
+                        <p className='mt-5 inline-flex items-center gap-2 rounded-full bg-white/15 px-4 py-2 text-sm whitespace-nowrap'>
+                            <Clock className='h-4 w-4 shrink-0' aria-hidden />
+                            Open every day · 12PM – 10PM
                         </p>
                     </div>
 
                     <div>
                         <h3 className='mb-3 text-xs tracking-[0.2em] text-white/75 uppercase'>Contact</h3>
-                        <address className='space-y-2 text-sm not-italic'>
-                            <p className='flex items-start gap-2'>
-                                <MapPin className='mt-0.5 h-4 w-4 shrink-0' aria-hidden />
-                                <a
-                                    href='https://maps.google.com/?q=75+Portland+St,+Toronto,+ON+M5V+2M9'
-                                    className={linkClass}>
-                                    75 Portland St.
-                                    <br />
-                                    Toronto, ON M5V 2M9
-                                </a>
-                            </p>
-                            <p className='flex items-center gap-2'>
-                                <Mail className='h-4 w-4 shrink-0' aria-hidden />
-                                <a href='mailto:info@littlebaba.com' className={`${linkClass} break-all`}>
-                                    info@littlebaba.com
-                                </a>
-                            </p>
-                            <p className='flex items-center gap-2'>
-                                <Phone className='h-4 w-4 shrink-0' aria-hidden />
-                                <a href='tel:+16472658237' className={linkClass}>
-                                    (647) 265-8237
-                                </a>
-                            </p>
-                        </address>
+                        <ul className='grid gap-2.5'>
+                            {contacts.map(({ Icon, label, value, href }) => (
+                                <li key={label}>
+                                    <a
+                                        href={href}
+                                        className='group flex items-center gap-3 rounded-2xl border-2 border-white/30 bg-white/10 p-2.5 pr-4 transition hover:border-white hover:bg-white/20 focus-visible:ring-4 focus-visible:ring-white/40 focus-visible:outline-none'>
+                                        <span className='text-pink-deep flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white'>
+                                            <Icon className='h-[18px] w-[18px]' aria-hidden />
+                                        </span>
+                                        <span className='min-w-0 flex-1'>
+                                            <span className='block text-[11px] tracking-[0.2em] text-white/75 uppercase'>
+                                                {label}
+                                            </span>
+                                            <span className='block truncate text-sm'>{value}</span>
+                                        </span>
+                                        <ArrowUpRight
+                                            className='h-4 w-4 shrink-0 opacity-60 transition group-hover:opacity-100'
+                                            aria-hidden
+                                        />
+                                    </a>
+                                </li>
+                            ))}
+                        </ul>
                     </div>
 
-                    <div className='col-span-2 sm:col-span-1'>
+                    <div>
                         <h3 className='mb-3 text-xs tracking-[0.2em] text-white/75 uppercase'>Follow us</h3>
                         <ul className='flex gap-2'>
                             {socials.map(({ href, label, Icon }) => (
