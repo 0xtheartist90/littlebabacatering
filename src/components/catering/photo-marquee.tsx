@@ -69,7 +69,10 @@ export function PhotoMarquee({ items }: { items: MarqueeItem[] }) {
             <DialogPrimitive.Root open={open !== null} onOpenChange={(o) => !o && setOpen(null)}>
                 <DialogPrimitive.Portal>
                     <DialogPrimitive.Overlay className='data-[state=open]:animate-in data-[state=open]:fade-in-0 fixed inset-0 z-50 bg-black/85' />
-                    <DialogPrimitive.Content className='data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95 fixed inset-0 z-50 flex items-center justify-center p-4 outline-none sm:p-10'>
+                    <DialogPrimitive.Content
+                        onClick={() => setOpen(null)}
+                        aria-describedby={undefined}
+                        className='data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95 fixed inset-0 z-50 flex cursor-zoom-out items-center justify-center p-4 outline-none sm:p-10'>
                         <DialogPrimitive.Title className='sr-only'>{open?.alt}</DialogPrimitive.Title>
                         {open &&
                             (open.video ? (
@@ -80,7 +83,8 @@ export function PhotoMarquee({ items }: { items: MarqueeItem[] }) {
                                     controls
                                     loop
                                     playsInline
-                                    className='max-h-full max-w-full rounded-2xl'
+                                    onClick={(e) => e.stopPropagation()}
+                                    className='max-h-full max-w-full cursor-auto rounded-2xl'
                                 />
                             ) : (
                                 <div

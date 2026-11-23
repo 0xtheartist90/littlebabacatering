@@ -112,8 +112,10 @@ function Row({ categoryId, item, compact = false }: { categoryId: string; item: 
 
 /** Dish thumbnail; click to see the photo full size. */
 function DishPhoto({ src, name, compact }: { src: string; name: string; compact: boolean }) {
+    const [open, setOpen] = useState(false);
+
     return (
-        <DialogPrimitive.Root>
+        <DialogPrimitive.Root open={open} onOpenChange={setOpen}>
             <DialogPrimitive.Trigger
                 aria-label={`View photo of ${name}`}
                 className={`group/photo bg-pink-soft/40 focus-visible:ring-pink/40 relative shrink-0 cursor-zoom-in overflow-hidden focus-visible:ring-4 focus-visible:outline-none ${
@@ -132,18 +134,22 @@ function DishPhoto({ src, name, compact }: { src: string; name: string; compact:
             </DialogPrimitive.Trigger>
             <DialogPrimitive.Portal>
                 <DialogPrimitive.Overlay className='data-[state=open]:animate-in data-[state=open]:fade-in-0 fixed inset-0 z-50 bg-black/85' />
-                <DialogPrimitive.Content className='data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95 fixed inset-0 z-50 flex flex-col items-center justify-center gap-4 p-4 outline-none sm:p-10'>
-                    <DialogPrimitive.Title className='font-display order-last text-2xl text-white sm:text-3xl'>
+                {/* Click anywhere (photo, title or backdrop) to go back. */}
+                <DialogPrimitive.Content
+                    onClick={() => setOpen(false)}
+                    aria-describedby={undefined}
+                    className='data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95 fixed inset-0 z-50 flex cursor-zoom-out flex-col items-center justify-center gap-5 p-4 outline-none sm:p-10'>
+                    <DialogPrimitive.Title className='font-display bg-cream text-pink-deep rounded-full px-7 py-2.5 text-3xl leading-none shadow-lg sm:text-4xl'>
                         {name}
                     </DialogPrimitive.Title>
-                    <div className='relative aspect-square w-full max-w-[min(90vw,calc(100svh-9rem))]'>
+                    <div className='relative aspect-square w-full max-w-[min(90vw,calc(100svh-10rem))] overflow-hidden rounded-[2rem] shadow-2xl'>
                         <Image
                             src={src}
                             alt={name}
                             fill
                             sizes='(min-width: 1024px) 900px, 90vw'
                             quality={90}
-                            className='rounded-2xl object-contain'
+                            className='object-cover'
                         />
                     </div>
                     <DialogPrimitive.Close
