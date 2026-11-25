@@ -27,73 +27,6 @@ export type Category = {
 
 export const categories: Category[] = [
     {
-        id: 'baba-box',
-        tab: 'Baba Box',
-        title: 'Baba Box',
-        unit: 'Price per person · min. 10 meals',
-        intro: 'Individual lunches, packed one person at a time in labelled boxes, so every guest grabs their own. Every box comes with pickles; pick a base and a dip for each one. Mix and match across your order.',
-        options: [
-            { label: 'Base', choices: ['Baba rice', 'Fattoush salad'] },
-            { label: 'Dip', choices: ['Hummus', 'Baba ghanoush'] }
-        ],
-        photo: '/images/box-in-hand.jpg',
-        photoAlt: 'A Little Baba Baba Box',
-        video: '/videos/baba-box.mp4',
-        groups: [
-            {
-                items: [
-                    {
-                        name: 'Chicken Shawarma',
-                        price: '19.95',
-                        desc: 'Marinated chicken thighs slow-roasted on a traditional vertical spit, thinly shaved with crisp, caramelized edges. With garlic toum.'
-                    },
-                    {
-                        name: 'Chicken Tawook',
-                        price: '19.95',
-                        desc: 'Marinated chicken thighs seared on a sizzling flat-top, chopped to order for crisp edges and juicy flavour. With garlic toum.'
-                    },
-                    {
-                        name: 'Kefta Beef & Lamb',
-                        price: '19.95',
-                        desc: 'Beef and lamb kefta seared until juicy and caramelized. With tahini.'
-                    },
-                    {
-                        name: 'Falafel',
-                        price: '14.95',
-                        tags: ['VG'],
-                        desc: 'Five fresh falafel, crisp outside and tender within. With tahini.'
-                    },
-                    {
-                        name: 'Fried Cauliflower',
-                        price: '15.95',
-                        tags: ['V'],
-                        desc: 'Golden-brown cauliflower with crisp edges. With tahini.'
-                    }
-                ]
-            }
-        ]
-    },
-    {
-        id: 'wrap-combos',
-        tab: 'Wrap Combos',
-        title: 'Wrap Combos',
-        unit: 'Price per person · min. 10 meals',
-        intro: 'Individual lunches, each packed in its own labelled box: the wrap, golden fries and a soda or water. Mix and match across your order.',
-        photo: '/images/sandwich-tall.jpg',
-        photoAlt: 'Little Baba wraps',
-        groups: [
-            {
-                items: [
-                    { name: 'Chicken Shawarma', price: '19.95' },
-                    { name: 'Chicken Tawook', price: '20.95' },
-                    { name: 'Kefta Beef & Lamb', price: '20.95' },
-                    { name: 'Falafel', price: '17.50', tags: ['VG'] },
-                    { name: 'Fried Cauliflower', price: '18.50', tags: ['V'] }
-                ]
-            }
-        ]
-    },
-    {
         id: 'platters',
         tab: 'Platters',
         title: 'Sharing Platters',
@@ -197,6 +130,73 @@ export const categories: Category[] = [
                 items: [
                     { name: '5 Sodas or Waters', price: '11.50' },
                     { name: 'Cookies', price: '24.95' }
+                ]
+            }
+        ]
+    },
+    {
+        id: 'baba-box',
+        tab: 'Baba Box',
+        title: 'Baba Box',
+        unit: 'Price per person · min. 10 meals',
+        intro: 'Individual lunches, packed one person at a time in labelled boxes, so every guest grabs their own. Every box comes with pickles; pick a base and a dip for each one. Mix and match across your order.',
+        options: [
+            { label: 'Base', choices: ['Baba rice', 'Fattoush salad'] },
+            { label: 'Dip', choices: ['Hummus', 'Baba ghanoush'] }
+        ],
+        photo: '/images/box-in-hand.jpg',
+        photoAlt: 'A Little Baba Baba Box',
+        video: '/videos/baba-box.mp4',
+        groups: [
+            {
+                items: [
+                    {
+                        name: 'Chicken Shawarma',
+                        price: '19.95',
+                        desc: 'Marinated chicken thighs slow-roasted on a traditional vertical spit, thinly shaved with crisp, caramelized edges. With garlic toum.'
+                    },
+                    {
+                        name: 'Chicken Tawook',
+                        price: '19.95',
+                        desc: 'Marinated chicken thighs seared on a sizzling flat-top, chopped to order for crisp edges and juicy flavour. With garlic toum.'
+                    },
+                    {
+                        name: 'Kefta Beef & Lamb',
+                        price: '19.95',
+                        desc: 'Beef and lamb kefta seared until juicy and caramelized. With tahini.'
+                    },
+                    {
+                        name: 'Falafel',
+                        price: '14.95',
+                        tags: ['VG'],
+                        desc: 'Five fresh falafel, crisp outside and tender within. With tahini.'
+                    },
+                    {
+                        name: 'Fried Cauliflower',
+                        price: '15.95',
+                        tags: ['V'],
+                        desc: 'Golden-brown cauliflower with crisp edges. With tahini.'
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        id: 'wrap-combos',
+        tab: 'Wrap Combos',
+        title: 'Wrap Combos',
+        unit: 'Price per person · min. 10 meals',
+        intro: 'Individual lunches, each packed in its own labelled box: the wrap, golden fries and a soda or water. Mix and match across your order.',
+        photo: '/images/sandwich-tall.jpg',
+        photoAlt: 'Little Baba wraps',
+        groups: [
+            {
+                items: [
+                    { name: 'Chicken Shawarma', price: '19.95' },
+                    { name: 'Chicken Tawook', price: '20.95' },
+                    { name: 'Kefta Beef & Lamb', price: '20.95' },
+                    { name: 'Falafel', price: '17.50', tags: ['VG'] },
+                    { name: 'Fried Cauliflower', price: '18.50', tags: ['V'] }
                 ]
             }
         ]
